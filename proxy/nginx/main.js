@@ -1,7 +1,9 @@
 
 function forwardRequest(r) {
+  r.variables.request_headers = JSON.stringify(r.headersIn)
   r.subrequest(`/__forward__${r.uri}`, {method: r.method, args: _queryString(r.args)})
     .then(res => {
+      r.variables.response_headers = JSON.stringify(res.headersOut)
       r.variables.response_body = res.responseBody
       _copyResponse(res, r)
     })
@@ -23,4 +25,4 @@ function _copyResponseHeaders(src, dest) {
   })
 }
 
-function dummy(_r) {}
+function doNothing(_r) {}
