@@ -5,19 +5,20 @@ Collection of services for observing http requests
 
 ## First thing first...
 
-If installing [Wireshark][1] is an option, consider using it.
+If installing [Wireshark][1] is an option, and the protocol to the remote
+host is HTTP (which is not common these days), consider using it or its
+terminal version `tshark`.
 
 To observe HTTP requests between your machine and `www.example.com`:
 
-1. Enable **Resolve Network Addresses** (in **View** ➡️ **Name Resolution**)
-1. Specify following query
+```sh
+tshark -j http -Y 'http and (http.host == www.example.com or http.response_for.uri contains www.example.com)' -T json
+```
 
-    ```
-    http and ip.host == www.google.com
-    ```
+Some useful links:
 
-1. Make requests
-1. Right-click a request you want to check its detail, select **Follow** ➡️ **HTTP Stream**
+* [Wireshark man page][2]
+* [6.4. Building Display Filter Expressions][3]
 
 ## Usage
 
@@ -74,3 +75,5 @@ request-logging_1  | ::ffff:172.21.0.1 - - [19/Apr/2019:13:05:27 +0000] "GET /fo
 ```
 
 [1]: https://www.wireshark.org/
+[2]: https://www.wireshark.org/docs/man-pages/wireshark.html
+[3]: https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html
