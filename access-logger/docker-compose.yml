@@ -9,8 +9,3 @@ services:
     - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
     - "8081:80"
-
-  request-logger:
-    image: mendhak/http-https-echo
-    ports:
-    - "8082:80"
