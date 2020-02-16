@@ -3,6 +3,22 @@
 
 Collection of services for observing http requests
 
+## First thing first...
+
+If installing [Wireshark][1] is an option, consider using it.
+
+To observe HTTP requests between your machine and `www.example.com`:
+
+1. Enable **Resolve Network Addresses** (in **View** ➡️ **Name Resolution**)
+1. Specify following query
+
+    ```
+    http and ip.host == www.google.com
+    ```
+
+1. Make requests
+1. Right-click a request you want to check its detail, select **Follow** ➡️ **HTTP Stream**
+
 ## Usage
 
 Start the services and observe log as you hit the ports.
@@ -56,3 +72,5 @@ request-logging_1  |   xhr: false,
 request-logging_1  |   os: { hostname: '08ba8f00a5e7' } }
 request-logging_1  | ::ffff:172.21.0.1 - - [19/Apr/2019:13:05:27 +0000] "GET /foo HTTP/1.1" 200 362 "-" "curl/7.54.0"
 ```
+
+[1]: https://www.wireshark.org/
